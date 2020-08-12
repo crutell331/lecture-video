@@ -4,7 +4,7 @@ class Header extends React.Component {
     state = { color: "black" }
 
     clickHandler = () => {
-        if (this.state.color == "black") {
+        if (this.state.color === "black") {
             this.setState({ color: "blue" })
         } else {
             this.setState({ color: "black" })
@@ -15,7 +15,7 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                <h1 onClick={this.clickHandler} style={{ "border-style": "dashed", "border-color": `${this.state.color}` }}>Welcome to Our App!</h1>
+                <h1 onClick={this.clickHandler} style={{ "borderStyle": "dashed", "borderColor": `${this.state.color}` }}>Welcome to Our App!</h1>
             </div >
         )
     }

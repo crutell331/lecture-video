@@ -1,0 +1,34 @@
+{
+  "instructors": [
+    {
+      "id": 1,
+      "name": "Steven",
+      "mod": 3
+    },
+    {
+      "id": 2,
+      "name": "Caryn",
+      "mod": 1
+    },
+    {
+      "id": 3,
+      "name": "Greg",
+      "mod": 2
+    },
+    {
+      "id": 4,
+      "name": "Tashawn",
+      "mod": 4
+    },
+    {
+      "name": "Eric",
+      "mod": "4",
+      "id": 5
+    },
+    {
+      "name": "Another one",
+      "mod": "1",
+      "id": 6
+    }
+  ]
+}

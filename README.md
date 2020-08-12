@@ -1,17 +1,7 @@
-## State & Events (Advanced)
+## React Router
 
-# Information Flow
-
-- Parent to Child
-  - Props
-
-- Internally (DOM to Component)
-  - State, Event Listeners, Callback Functions
-
-- Child to Parent 
-  - State, Event Listeners, Callback Functions, Props
+# App Refresh vs Internal Navigation
 
 
-  # Deliverables
-
-  - When I click on an instructor that instructor should update 
+In SPAs
+- The app is reacting to the literal URL string NOT an HTTP request
