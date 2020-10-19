@@ -1,7 +1,5 @@
-## React Router
-
-# App Refresh vs Internal Navigation
-
-
-In SPAs
-- The app is reacting to the literal URL string NOT an HTTP request
+# Question
+- this.props.history
+- JWT
+- Headers
+    - passive login # auth-lecture-code
