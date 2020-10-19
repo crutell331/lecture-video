@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import Instructor from '../Components/Instructor'
 import Form from '../Components/Form'
 import Search from '../Components/Search'
@@ -17,7 +17,10 @@ class InstructorContainer extends React.Component {
 
 
     componentDidMount() {
-        fetch("http://localhost:4000/instructors").then(resp => resp.json()).then(data => this.setState({ instructors: data }))
+
+        if (this.props.user) {
+            fetch("http://localhost:4000/instructors").then(resp => resp.json()).then(data => this.setState({ instructors: data }))
+        }
     }
 
     filteredInstructors = () => {
@@ -43,38 +46,52 @@ class InstructorContainer extends React.Component {
     }
 
     render() {
+        console.log("Current User: ", this.props.user)
         return (
+
             <>
-                {this.state.instructors.length === 0 ? <h1>Loading</h1> :
+                {this.props.user ?
 
                     <>
-                        <Switch>
-                            <Route path='/instructors/create' render={() => <Form submitHandler={this.submitHandler} />} />
-                            <Route path='/instructors/:id' render={({ match }) => {
-                                let id = parseInt(match.params.id)
-                                let foundInstructor = this.state.instructors.find((instructor) => instructor.id === id)
-                                return <Instructor instructor={foundInstructor} appClickHandler={this.props.appClickHandler} />
-                            }} />
-                            <Route path="/instructors" render={() => {
-                                let instructors = this.filteredInstructors().map(instructorObj => <Instructor key={instructorObj.id} instructor={instructorObj} appClickHandler={this.props.appClickHandler} />)
-                                return (
-                                    <>
-                                        {
-                                            this.state.instructors.length === 0 ? <h1>LOADING INSTRUCTORS</h1> :
-                                                <>
-                                                    <br />
-                                                    <Search searchValue={this.state.searchValue} searchHandler={this.searchHandler} />
-                                                    {instructors}
-                                                </>
+                        {this.state.instructors.length === 0 ? <h1>Loading</h1> :
 
-                                        }
-                                    </>
-                                )
-                            }} />
-                        </Switch>
+
+                            <Switch>
+                                <Route path='/instructors/create' render={() => <Form submitHandler={this.submitHandler} />} />
+                                <Route path='/instructors/:id' render={({ match }) => {
+                                    let id = parseInt(match.params.id)
+                                    let foundInstructor = this.state.instructors.find((instructor) => instructor.id === id)
+                                    return <Instructor instructor={foundInstructor} appClickHandler={this.props.appClickHandler} />
+                                }} />
+                                <Route path="/instructors" render={() => {
+                                    let instructors = this.filteredInstructors().map(instructorObj => <Instructor key={instructorObj.id} instructor={instructorObj} appClickHandler={this.props.appClickHandler} />)
+                                    return (
+                                        <>
+                                            {
+                                                this.state.instructors.length === 0 ? <h1>LOADING INSTRUCTORS</h1> :
+                                                    <>
+                                                        <br />
+                                                        <Search searchValue={this.state.searchValue} searchHandler={this.searchHandler} />
+                                                        {instructors}
+                                                    </>
+
+                                            }
+                                        </>
+                                    )
+                                }} />
+                            </Switch>
+
+                        }
                     </>
+
+
+                    :
+
+                    <Redirect to="/welcome" />
+
                 }
             </>
+
         )
 
     }

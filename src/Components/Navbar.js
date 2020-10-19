@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-function Navbar() {
+function Navbar(props) {
     return (
         <ul>
             <NavLink to="/welcome">
@@ -16,6 +16,15 @@ function Navbar() {
             <NavLink to="/instructors/create">
                 <li>Add Instructor</li>
             </NavLink>
+            <NavLink to="/signup">
+                <li>Create an Account</li>
+            </NavLink>
+
+            {props.user ? <li onClick={props.clickHandler}>Log Out</li> :
+                <NavLink to="/login">
+                    <li>Log In</li>
+                </NavLink>
+            }
         </ul>
     )
 }
